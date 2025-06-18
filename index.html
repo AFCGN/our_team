@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACGN Leadership Team</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #00a950 0%, #ffd24f 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeInDown 1s ease-out;
+            position: relative;
+        }
+
+        .return-home {
+            position: absolute;
+            top: 0;
+            left: 20px;
+            z-index: 10;
+        }
+
+        .return-home a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #00a950;
+            padding: 12px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .return-home a:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .return-home i {
+            font-size: 1.1rem;
+        }
+
+        .logo-container {
+            margin-bottom: 30px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .logo {
+            width: 120px;
+            height: auto;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+        }
+
+        .header h1 {
+            color: white;
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: slideInFromTop 1.2s ease-out 0.3s both;
+        }
+
+        .header p {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.4rem;
+            max-width: 700px;
+            margin: 0 auto;
+            animation: slideInFromTop 1.2s ease-out 0.6s both;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .team-member {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: none;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease-out both;
+        }
+
+        .team-member::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #00a950, #ffd24f);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .team-member:hover::before {
+            transform: scaleX(1);
+        }
+
+        .team-member:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.25);
+        }
+
+        .team-member.ceo {
+            background: linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(248,249,250,0.98) 100%);
+            grid-column: 1 / -1;
+            max-width: 900px;
+            margin: 0 auto;
+            border: 2px solid rgba(0, 165, 80, 0.2);
+        }
+
+        .team-member.ceo::before {
+            background: linear-gradient(90deg, #00a950, #ffd24f);
+        }
+
+        .member-image {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 25px;
+            display: block;
+            border: 6px solid #ecf0f1;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            cursor: pointer;
+        }
+
+        .member-image:hover {
+            transform: scale(1.05);
+            border-color: #00a950;
+            box-shadow: 0 15px 40px rgba(0, 165, 80, 0.3);
+        }
+
+        .member-name {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 8px;
+            text-align: center;
+            transition: color 0.3s ease;
+        }
+
+        .team-member:hover .member-name {
+            color: #00a950;
+        }
+
+        .member-title {
+            font-size: 1.1rem;
+            color: #00a950;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 25px;
+            padding: 8px 16px;
+            background: rgba(0, 165, 80, 0.1);
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .team-member:hover .member-title {
+            background: rgba(0, 165, 80, 0.2);
+            transform: scale(1.05);
+        }
+
+        .member-bio {
+            color: #555;
+            line-height: 1.8;
+            text-align: justify;
+            font-size: 1rem;
+        }
+
+        .member-bio p {
+            margin-bottom: 18px;
+            opacity: 0.9;
+            transition: opacity 0.3s ease;
+        }
+
+        .team-member:hover .member-bio p {
+            opacity: 1;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #ffd24f, #f39c12);
+            color: #333;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(255, 210, 79, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .team-member:hover .highlight {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(255, 210, 79, 0.4);
+        }
+
+        .passion-note {
+            background: linear-gradient(135deg, #ecf0f1, #bdc3c7);
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            border-left: 5px solid #00a950;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .passion-note::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .team-member:hover .passion-note::before {
+            left: 100%;
+        }
+
+        .team-member:hover .passion-note {
+            background: linear-gradient(135deg, #d5dbdb, #aeb6bf);
+            transform: translateX(5px);
+        }
+
+        .linkedin-section {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #ecf0f1;
+        }
+
+        .linkedin-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #0077b5, #005885);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 119, 181, 0.3);
+        }
+
+        .linkedin-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 119, 181, 0.4);
+            background: linear-gradient(135deg, #005885, #0077b5);
+        }
+
+        .linkedin-link i {
+            font-size: 1.2rem;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background: white;
+            margin: 2% auto;
+            padding: 0;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 1000px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideInDown 0.4s ease;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #00a950, #ffd24f);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 20px 20px 0 0;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .close-modal:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .modal-body {
+            padding: 30px;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        .modal-image {
+            width: 100%;
+            max-width: 300px;
+            height: 300px;
+            border-radius: 15px;
+            object-fit: cover;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            border: 4px solid #ecf0f1;
+        }
+
+        .modal-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .modal-name {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .modal-title {
+            font-size: 1.3rem;
+            color: #00a950;
+            font-weight: 600;
+            padding: 12px 20px;
+            background: rgba(0, 165, 80, 0.1);
+            border-radius: 25px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .modal-bio {
+            color: #555;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .modal-bio p {
+            margin-bottom: 20px;
+        }
+
+        .modal-passion {
+            background: linear-gradient(135deg, #ecf0f1, #bdc3c7);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 6px solid #00a950;
+            margin-top: 20px;
+        }
+
+        .modal-linkedin {
+            margin-top: 25px;
+        }
+
+        .modal-linkedin .linkedin-link {
+            font-size: 1.1rem;
+            padding: 15px 30px;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInFromTop {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Stagger animation for team members */
+        .team-member:nth-child(1) { animation-delay: 0.1s; }
+        .team-member:nth-child(2) { animation-delay: 0.3s; }
+        .team-member:nth-child(3) { animation-delay: 0.5s; }
+        .team-member:nth-child(4) { animation-delay: 0.7s; }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+                margin-top: 60px;
+            }
+            
+            .header p {
+                font-size: 1.1rem;
+            }
+            
+            .team-member {
+                padding: 25px;
+                margin: 0 10px;
+            }
+            
+            .member-name {
+                font-size: 1.3rem;
+            }
+
+            .member-image {
+                width: 150px;
+                height: 150px;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .logo {
+                width: 100px;
+            }
+
+            .return-home {
+                left: 10px;
+            }
+
+            .return-home a {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+
+            /* Modal responsive */
+            .modal-content {
+                width: 95%;
+                margin: 5% auto;
+                max-height: 95vh;
+            }
+
+            .modal-body {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 20px;
+            }
+
+            .modal-image {
+                max-width: 250px;
+                height: 250px;
+                margin: 0 auto;
+            }
+
+            .modal-name {
+                font-size: 1.8rem;
+                text-align: center;
+            }
+
+            .modal-title {
+                text-align: center;
+                font-size: 1.1rem;
+            }
+
+            .modal-header {
+                padding: 15px 20px;
+            }
+
+            .close-modal {
+                top: 15px;
+                right: 20px;
+                font-size: 1.5rem;
+                width: 35px;
+                height: 35px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 2rem;
+                margin-top: 70px;
+            }
+            
+            .member-image {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .team-member {
+                padding: 20px;
+            }
+
+            .logo {
+                width: 80px;
+            }
+
+            .return-home a {
+                padding: 8px 12px;
+                font-size: 0.8rem;
+            }
+
+            .return-home i {
+                font-size: 1rem;
+            }
+
+            /* Modal responsive for small screens */
+            .modal-content {
+                width: 98%;
+                margin: 2% auto;
+            }
+
+            .modal-body {
+                padding: 15px;
+            }
+
+            .modal-image {
+                max-width: 200px;
+                height: 200px;
+            }
+
+            .modal-name {
+                font-size: 1.5rem;
+            }
+
+            .modal-title {
+                font-size: 1rem;
+                padding: 10px 15px;
+            }
+
+            .modal-bio {
+                font-size: 1rem;
+            }
+
+            .modal-passion {
+                padding: 20px;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Loading animation */
+        .loading {
+            opacity: 0;
+            animation: fadeIn 0.5s ease-in forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Prevent body scroll when modal is open */
+        body.modal-open {
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="return-home">
+                <a href="https://www.afcgn.com" target="_blank">
+                    <i class="fas fa-home"></i>
+                    Return Home
+                </a>
+            </div>
+            <div class="logo-container">
+                <img src="logo.png" alt="ACGN Logo" class="logo">
+            </div>
+            <h1>Meet Our Leadership Team</h1>
+            <p>Introducing the dynamic leaders driving excellence and innovation at the African Corporate Governance Network</p>
+        </div>
+
+        <div class="team-grid">
+            <!-- CEO -->
+            <div class="team-member ceo">
+                <img src="ceo.png" alt="Rev. (Mrs.) Angela Carmen Appiah" class="member-image" onclick="openModal('ceo')">
+                <h2 class="member-name">Rev. (Mrs.) Angela Carmen Appiah, FIoD</h2>
+                <p class="member-title">Chief Executive Officer & President/Chair, Institute of Directors-Ghana</p>
+                <div class="member-bio">
+                    <p>Rev. (Mrs.) Angela Carmen Appiah is the current President/Chair of the tenth (10th) Governing Council of the Institute of Directors-Ghana (IoD-Gh).</p>
+                    
+                    <p>She holds an MSc. in Advanced Practice (Leadership and Management) from the University of Cardiff, Wales, U.K and thirty (30) years of professional practice experiences across a wide field of the health industry including Clinical Care and Management, Academia, Public Administration and Regulation.</p>
+                    
+                    <p>She is a multi-talented Professional with Leadership, Education and Administrative Skills complemented with rich experiences in Board Leadership and Secretaryship, Corporate Governance, Coaching, Conflict Resolution, Management and Administration, Counselling, Problem-Solving and Systems set-up and Restructuring.</p>
+                    
+                    <p>A Fellow of the Institute of Directors-Ghana, she has also served as Chair of three (3) Interim Management Committees (IMC) following nomination by the Council to manage transitions. Prior to her election as President of the Institute on 11th May 2023, she served in the capacity of the Vice-President for two (2) years.</p>
+                    
+                    <p>Rev. (Mrs.) Appiah also serves as a Board Member of the African Corporate Governance Network (ACGN), a conglomerate of close to thirty (30) IoDs or governance institutes on the Continent and is presently Chairing yet another Interim Management Committee to manage a transition having been nominated by the Board.</p>
+                    
+                    <p>She is a Pastor, Mentor, Mother, Teacher and Friend to those that the Lord has put in her care. A very passionate Nurse, she considers herself very privileged to have joined the noble profession of nursing having played varied roles and impacting her spheres of influence from bedside Nursing, Nursing Education and Administration and finally dovetailing into Nursing Regulation and Policy Formulation.</p>
+                    
+                    <div class="passion-note">
+                        <p><strong>Her mantra for life:</strong> "Press on regardless!" She believes that the single most important resource on earth is the human specie created in the image of God (imago Dei). A lover of music, she evangelizes through gospel music as a member of the Music Ministry Chorale (MMC).</p>
+                    </div>
+                </div>
+                <div class="linkedin-section">
+                    <a href="https://www.linkedin.com/in/angela-carmen-appiah-600b4b15/" target="_blank" class="linkedin-link">
+                        <i class="fab fa-linkedin"></i>
+                        Connect on LinkedIn
+                    </a>
+                </div>
+            </div>
+
+            <!-- Dr. Bernard Kisiton Larbi -->
+            <div class="team-member">
+                <img src="dfa.png" alt="Dr. Bernard Kisiton Larbi" class="member-image" onclick="openModal('dfa')">
+                <h2 class="member-name">Dr. Bernard Kisiton Larbi</h2>
+                <p class="member-title">Director, Finance and Administration</p>
+                <div class="member-bio">
+                    <p>Dr. Bernard is quite the multi-talented professional who brings a wealth of expertise to our finance and administration portfolio. Currently serving as Group Head of Audit at KEK Insurance Brokers Ltd., he's built an impressive career spanning forensic auditing, risk management, and financial analysis.</p>
+                    
+                    <p>With a PhD in Research from Accra Business School and certifications that read like a who's who of professional excellence - from Chartered Certified Financial Accountant to Certified Forensic Investigative Professional - Bernard has the credentials to match his passion for precision and integrity in financial stewardship.</p>
+                    
+                    <p>His extensive experience across rural banking, microfinance, and corporate audit gives him a unique perspective on both grassroots and corporate financial management. What makes Bernard particularly valuable is his ability to blend <span class="highlight">forensic investigation skills</span> with strategic financial planning.</p>
+                    
+                    <div class="passion-note">
+                        <p><strong>Fun fact:</strong> Bernard's passion area is soccer, and he immediately connected with our Training Director over their shared love for the beautiful game. When he's not ensuring financial compliance, you'll find him analyzing football strategies with the same analytical mind he brings to audit work!</p>
+                    </div>
+                </div>
+                <div class="linkedin-section">
+                    <a href="https://www.linkedin.com/in/dr-bernard-kisiton-larbi-06469571/" target="_blank" class="linkedin-link">
+                        <i class="fab fa-linkedin"></i>
+                        Connect on LinkedIn
+                    </a>
+                </div>
+            </div>
+
+            <!-- Mr. Benjamin Mapetese -->
+            <div class="team-member">
+                <img src="dpta.png" alt="Mr. Benjamin Mapetese" class="member-image" onclick="openModal('dpta')">
+                <h2 class="member-name">Mr. Benjamin Mapetese</h2>
+                <p class="member-title">Director, Training, Policy and Advocacy</p>
+                <div class="member-bio">
+                    <p>Meet Benjamin from Zimbabwe - our training powerhouse who's been in his element since 1998! With over two decades of training excellence under his belt, Benjamin brings a treasure trove of awards and recognition in coaching and training development.</p>
+                    
+                    <p>Currently serving as Training Manager at Telone Zimbabwe and having worked with prestigious organizations like the Institute of Directors Zimbabwe, Benjamin has that rare combination of <span class="highlight">strategic HR development expertise</span> and hands-on training delivery that makes learning stick.</p>
+                    
+                    <p>What sets Benjamin apart is his modern facilitation approach and his knack for employee engagement programs. He's presently running a director development program and has been instrumental in creating training functions from scratch - exactly the kind of innovative thinking we need for our policy and advocacy initiatives across Africa.</p>
+                    
+                    <div class="passion-note">
+                        <p><strong>His passion:</strong> Soccer! Benjamin is currently managing 2 premier leagues in Zimbabwe. When he had that conversation with Dr. Professor Henry J. Boapia, he was just happy to connect over shared experiences. His dual love for developing people and developing football talent shows his commitment to excellence in all areas.</p>
+                    </div>
+                </div>
+                <div class="linkedin-section">
+                    <a href="https://www.linkedin.com/in/benjamin-mapetese-58533924/" target="_blank" class="linkedin-link">
+                        <i class="fab fa-linkedin"></i>
+                        Connect on LinkedIn
+                    </a>
+                </div>
+            </div>
+
+            <!-- Mr. Pervious Chileya -->
+            <div class="team-member">
+                <img src="dmeict.png" alt="Mr. Pervious Chileya" class="member-image" onclick="openModal('dmeict')">
+                <h2 class="member-name">Mr. Pervious Chileya</h2>
+                <p class="member-title">Director of Marketing, Events and ICT</p>
+                <div class="member-bio">
+                    <p>Say hello to Pervious from Zambia - our youngest director who happens to be the perfect fit for our digital age! Pervious brings extensive experience in systems design and development, with a professional background spanning the tech world, retail sector, and scientific community - and that's exactly why he hits the ground running.</p>
+                    
+                    <p>With a Bachelor's in Business Administration specializing in Computer Management & Information Systems from Rusangu University, Pervious brings that fresh, <span class="highlight">tech-savvy perspective</span> that modern organizations desperately need. His experience spans from digital marketing management to IT systems development, making him our go-to person for all things digital transformation.</p>
+                    
+                    <p>Currently driving strategic events, marketing, and ICT initiatives across our 15+ African member countries, Pervious has already proven his ability to align marketing efforts with organizational goals while executing engaging virtual and hybrid event strategies that maximize member engagement.</p>
+                    
+                    <div class="passion-note">
+                        <p><strong>Hidden talent:</strong> Beyond his tech wizardry, Pervious is also a poet! This creative side adds a unique dimension to his marketing approach, bringing both analytical precision and creative flair to our brand communications across Africa.</p>
+                    </div>
+                </div>
+                <div class="linkedin-section">
+                    <a href="https://www.linkedin.com/in/pervious-chileya-631a6b183/" target="_blank" class="linkedin-link">
+                        <i class="fab fa-linkedin"></i>
+                        Connect on LinkedIn
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="memberModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close-modal" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <img id="modalImage" src="" alt="" class="modal-image">
+                <div class="modal-info">
+                    <h2 id="modalName" class="modal-name"></h2>
+                    <p id="modalTitle" class="modal-title"></p>
+                    <div id="modalBio" class="modal-bio"></div>
+                    <div id="modalPassion" class="modal-passion"></div>
+                    <div id="modalLinkedin" class="modal-linkedin"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Team member data
+        const teamMembers = {
+            ceo: {
+                name: "Rev. (Mrs.) Angela Carmen Appiah, FIoD",
+                title: "Chief Executive Officer & President/Chair, Institute of Directors-Ghana",
+                image: "ceo.png",
+                bio: `
+                    <p>Rev. (Mrs.) Angela Carmen Appiah is the current President/Chair of the tenth (10th) Governing Council of the Institute of Directors-Ghana (IoD-Gh).</p>
+                    
+                    <p>She holds an MSc. in Advanced Practice (Leadership and Management) from the University of Cardiff, Wales, U.K and thirty (30) years of professional practice experiences across a wide field of the health industry including Clinical Care and Management, Academia, Public Administration and Regulation.</p>
+                    
+                    <p>She is a multi-talented Professional with Leadership, Education and Administrative Skills complemented with rich experiences in Board Leadership and Secretaryship, Corporate Governance, Coaching, Conflict Resolution, Management and Administration, Counselling, Problem-Solving and Systems set-up and Restructuring.</p>
+                    
+                    <p>A Fellow of the Institute of Directors-Ghana, she has also served as Chair of three (3) Interim Management Committees (IMC) following nomination by the Council to manage transitions. Prior to her election as President of the Institute on 11th May 2023, she served in the capacity of the Vice-President for two (2) years.</p>
+                    
+                    <p>Rev. (Mrs.) Appiah also serves as a Board Member of the African Corporate Governance Network (ACGN), a conglomerate of close to thirty (30) IoDs or governance institutes on the Continent and is presently Chairing yet another Interim Management Committee to manage a transition having been nominated by the Board.</p>
+                    
+                    <p>She is a Pastor, Mentor, Mother, Teacher and Friend to those that the Lord has put in her care. A very passionate Nurse, she considers herself very privileged to have joined the noble profession of nursing having played varied roles and impacting her spheres of influence from bedside Nursing, Nursing Education and Administration and finally dovetailing into Nursing Regulation and Policy Formulation.</p>
+                `,
+                passion: '<p><strong>Her mantra for life:</strong> "Press on regardless!" She believes that the single most important resource on earth is the human specie created in the image of God (imago Dei). A lover of music, she evangelizes through gospel music as a member of the Music Ministry Chorale (MMC).</p>',
+                linkedin: "https://www.linkedin.com/in/angela-carmen-appiah-600b4b15/"
+            },
+            dfa: {
+                name: "Dr. Bernard Kisiton Larbi",
+                title: "Director, Finance and Administration",
+                image: "dfa.png",
+                bio: `
+                    <p>Dr. Bernard is quite the multi-talented professional who brings a wealth of expertise to our finance and administration portfolio. Currently serving as Group Head of Audit at KEK Insurance Brokers Ltd., he's built an impressive career spanning forensic auditing, risk management, and financial analysis.</p>
+                    
+                    <p>With a PhD in Research from Accra Business School and certifications that read like a who's who of professional excellence - from Chartered Certified Financial Accountant to Certified Forensic Investigative Professional - Bernard has the credentials to match his passion for precision and integrity in financial stewardship.</p>
+                    
+                    <p>His extensive experience across rural banking, microfinance, and corporate audit gives him a unique perspective on both grassroots and corporate financial management. What makes Bernard particularly valuable is his ability to blend <span class="highlight">forensic investigation skills</span> with strategic financial planning.</p>
+                `,
+                passion: '<p><strong>Fun fact:</strong> Bernard\'s passion area is soccer, and he immediately connected with our Training Director over their shared love for the beautiful game. When he\'s not ensuring financial compliance, you\'ll find him analyzing football strategies with the same analytical mind he brings to audit work!</p>',
+                linkedin: "https://www.linkedin.com/in/dr-bernard-kisiton-larbi-06469571/"
+            },
+            dpta: {
+                name: "Mr. Benjamin Mapetese",
+                title: "Director, Training, Policy and Advocacy",
+                image: "dpta.png",
+                bio: `
+                    <p>Meet Benjamin from Zimbabwe - our training powerhouse who's been in his element since 1998! With over two decades of training excellence under his belt, Benjamin brings a treasure trove of awards and recognition in coaching and training development.</p>
+                    
+                    <p>Currently serving as Training Manager at Telone Zimbabwe and having worked with prestigious organizations like the Institute of Directors Zimbabwe, Benjamin has that rare combination of <span class="highlight">strategic HR development expertise</span> and hands-on training delivery that makes learning stick.</p>
+                    
+                    <p>What sets Benjamin apart is his modern facilitation approach and his knack for employee engagement programs. He's presently running a director development program and has been instrumental in creating training functions from scratch - exactly the kind of innovative thinking we need for our policy and advocacy initiatives across Africa.</p>
+                `,
+                passion: '<p><strong>His passion:</strong> Soccer! Benjamin is currently managing 2 premier leagues in Zimbabwe. When he had that conversation with Dr. Professor Henry J. Boapia, he was just happy to connect over shared experiences. His dual love for developing people and developing football talent shows his commitment to excellence in all areas.</p>',
+                linkedin: "https://www.linkedin.com/in/benjamin-mapetese-58533924/"
+            },
+            dmeict: {
+                name: "Mr. Pervious Chileya",
+                title: "Director of Marketing, Events and ICT",
+                image: "dmeict.png",
+                bio: `
+                    <p>Say hello to Pervious from Zambia - our youngest director who happens to be the perfect fit for our digital age! Pervious brings extensive experience in systems design and development, with a professional background spanning the tech world, retail sector, and scientific community - and that's exactly why he hits the ground running.</p>
+                    
+                    <p>With a Bachelor's in Business Administration specializing in Computer Management & Information Systems from Rusangu University, Pervious brings that fresh, <span class="highlight">tech-savvy perspective</span> that modern organizations desperately need. His experience spans from digital marketing management to IT systems development, making him our go-to person for all things digital transformation.</p>
+                    
+                    <p>Currently driving strategic events, marketing, and ICT initiatives across our 15+ African member countries, Pervious has already proven his ability to align marketing efforts with organizational goals while executing engaging virtual and hybrid event strategies that maximize member engagement.</p>
+                `,
+                passion: '<p><strong>Hidden talent:</strong> Beyond his tech wizardry, Pervious is also a poet! This creative side adds a unique dimension to his marketing approach, bringing both analytical precision and creative flair to our brand communications across Africa.</p>',
+                linkedin: "https://www.linkedin.com/in/pervious-chileya-631a6b183/"
+            }
+        };
+
+        // Modal functions
+        function openModal(memberId) {
+            const member = teamMembers[memberId];
+            const modal = document.getElementById('memberModal');
+            
+            document.getElementById('modalImage').src = member.image;
+            document.getElementById('modalImage').alt = member.name;
+            document.getElementById('modalName').textContent = member.name;
+            document.getElementById('modalTitle').textContent = member.title;
+            document.getElementById('modalBio').innerHTML = member.bio;
+            document.getElementById('modalPassion').innerHTML = member.passion;
+            document.getElementById('modalLinkedin').innerHTML = `
+                <a href="${member.linkedin}" target="_blank" class="linkedin-link">
+                    <i class="fab fa-linkedin"></i>
+                    Connect on LinkedIn
+                </a>
+            `;
+            
+            modal.style.display = 'block';
+            document.body.classList.add('modal-open');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('memberModal');
+            modal.style.display = 'none';
+            document.body.classList.remove('modal-open');
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('memberModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Add loading animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const teamMembers = document.querySelectorAll('.team-member');
+            teamMembers.forEach(member => {
+                member.classList.add('loading');
+            });
+        });
+
+        // Add scroll-triggered animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.team-member').forEach(member => {
+            observer.observe(member);
+        });
+    </script>
+</body>
+</html>
