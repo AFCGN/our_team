@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ACGN Portal Dashboard (Demo)</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+  <!-- Header -->
+  <header class="bg-blue-900 text-white p-4 shadow">
+    <div class="flex justify-between items-center">
+      <h1 class="text-xl font-bold">ACGN Internal Portal</h1>
+      <p class="text-sm">Logged in as: <strong>Superuser (DMEICT)</strong></p>
+    </div>
+  </header>
+
+  <main class="p-6">
+    <!-- Overview -->
+    <section class="mb-6">
+      <h2 class="text-2xl font-semibold mb-2">Portal Overview</h2>
+      <p class="text-sm text-gray-700">This portal allows internal users of ACGN to collaborate, manage documents, assign tasks, log inventory, and propose internal initiatives. Superusers have full access to system administration including user, storage, and access control.</p>
+    </section>
+
+    <!-- Notification Panel -->
+    <section class="mb-6">
+      <h3 class="text-xl font-semibold mb-2">Notifications</h3>
+      <div class="space-y-2">
+        <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-3">
+          ✅ You've been added to Storage Room <strong>Committee Files</strong>.
+          <button class="float-right text-sm text-green-700 hover:underline">Dismiss</button>
+        </div>
+        <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-3">
+          📧 New message from <strong>DFA</strong>.
+          <button class="float-right text-sm text-yellow-700 hover:underline">Dismiss</button>
+        </div>
+        <div class="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-3">
+          🗓️ Upcoming meeting in <strong>24 hours</strong>.
+          <button class="float-right text-sm text-blue-700 hover:underline">Dismiss</button>
+        </div>
+        <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-3">
+          ⚠️ Task <strong>"Submit Q2 Report"</strong> due soon.
+          <button class="float-right text-sm text-red-700 hover:underline">Dismiss</button>
+        </div>
+        <div class="bg-purple-100 border-l-4 border-purple-500 text-purple-700 p-3">
+          🎉 Upcoming event: <strong>Annual Governance Summit</strong>
+          <button class="float-right text-sm text-purple-700 hover:underline">Dismiss</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Superuser Dashboard -->
+    <section class="mb-10">
+      <h3 class="text-xl font-semibold mb-2">Superuser Dashboard</h3>
+      <div class="grid grid-cols-2 gap-4">
+        <div class="bg-white p-4 rounded shadow">
+          <h4 class="font-bold">User & Role Management</h4>
+          <ul class="text-sm list-disc ml-5 mt-2">
+            <li>Create/edit/delete user accounts</li>
+            <li>Assign roles (CEO, Director, Officer)</li>
+            <li>Reset passwords</li>
+          </ul>
+        </div>
+
+        <div class="bg-white p-4 rounded shadow">
+          <h4 class="font-bold">Storage Room Management</h4>
+          <ul class="text-sm list-disc ml-5 mt-2">
+            <li>Create new storage rooms</li>
+            <li>Assign access by role or individual</li>
+            <li>Monitor uploads</li>
+          </ul>
+        </div>
+
+        <div class="bg-white p-4 rounded shadow">
+          <h4 class="font-bold">Inventory Control</h4>
+          <p class="text-sm mt-2">View all departmental assets, add digital/physical items, and track renewal dates.</p>
+        </div>
+
+        <div class="bg-white p-4 rounded shadow">
+          <h4 class="font-bold">Proposal Approvals</h4>
+          <p class="text-sm mt-2">Approve submitted proposals and delegate tasks accordingly.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- User Dashboard -->
+    <section>
+      <h3 class="text-xl font-semibold mb-2">User Dashboard</h3>
+      <div class="grid grid-cols-2 gap-4">
+        <div class="bg-white p-4 rounded shadow">
+          <h4 class="font-bold">My Tasks</h4>
+          <p class="text-sm mt-2">View assigned tasks, update status, and upload related files.</p>
+        </div>
+
+        <div class="bg-white p-4 rounded shadow">
+          <h4 class="font-bold">Submit Files</h4>
+          <p class="text-sm mt-2">Upload documents to shared rooms or specific departments.</p>
+        </div>
+
+        <div class="bg-white p-4 rounded shadow">
+          <h4 class="font-bold">Inventory Log</h4>
+          <p class="text-sm mt-2">Add or update assets under your department (physical or digital).</p>
+        </div>
+
+        <div class="bg-white p-4 rounded shadow">
+          <h4 class="font-bold">Proposals</h4>
+          <p class="text-sm mt-2">Submit new initiative or activity proposals for approval by the CEO or Superuser.</p>
+        </div>
+
+        <div class="bg-white p-4 rounded shadow">
+          <h4 class="font-bold">Upcoming Meetings</h4>
+          <p class="text-sm mt-2">Check meeting schedule, duration, and participant list.</p>
+        </div>
+
+        <div class="bg-white p-4 rounded shadow">
+          <h4 class="font-bold">Reports</h4>
+          <p class="text-sm mt-2">Generate reports on your tasks, uploads, or projects.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+</body>
+</html>

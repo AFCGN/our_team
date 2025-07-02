@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>African Corporate Governance Network - Our Team</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: #1f2937;
+            margin-bottom: 16px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #6b7280;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .employee-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .employee-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            object-fit: cover;
+            margin: 0 auto 16px;
+            display: block;
+        }
+
+        .employee-name {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 8px;
+        }
+
+        .employee-title {
+            color: #6b7280;
+            margin-bottom: 16px;
+            font-size: 0.9rem;
+        }
+
+        .view-card-btn {
+            background: #0ea5e9;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .view-card-btn:hover {
+            background: #0284c7;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 32px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: #f3f4f6;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: #6b7280;
+            transition: background-color 0.2s;
+        }
+
+        .modal-close:hover {
+            background: #e5e7eb;
+            color: #374151;
+        }
+
+        .modal-profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 20px;
+            object-fit: cover;
+            margin: 0 auto 24px;
+            display: block;
+        }
+
+        .modal-employee-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 16px;
+            letter-spacing: 0.5px;
+        }
+
+        .add-contact-btn {
+            background: #0ea5e9;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        .add-contact-btn:hover {
+            background: #0284c7;
+        }
+
+        .contact-info {
+            text-align: left;
+            border-top: 1px solid #e5e7eb;
+            padding-top: 24px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .contact-icon {
+            width: 20px;
+            height: 20px;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        .contact-details h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 4px;
+        }
+
+        .contact-details p {
+            font-size: 14px;
+            color: #6b7280;
+            line-height: 1.4;
+        }
+
+        .contact-details a {
+            color: #0ea5e9;
+            text-decoration: none;
+        }
+
+        .contact-details a:hover {
+            color: #0284c7;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                padding: 24px;
+                margin: 10px;
+            }
+            
+            .modal-employee-name {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>African Corporate Governance Network Team</h1>
+            <p>Connect with our leadership team. Click on any card to view their contact information and add them to your contacts.</p>
+        </div>
+
+        <div class="team-grid">
+            <div class="employee-card" onclick="openModal('angela-appiah')">
+                <img src="images/ceo.png" alt="Rev. (Mrs.) Angela Carmen Appiah" class="profile-image">
+                <h3 class="employee-name">REV. (MRS.) ANGELA CARMEN APPIAH</h3>
+                <p class="employee-title">CHIEF EXECUTIVE OFFICER, FIoD-Gh</p>
+                <button class="view-card-btn">View Contact Card</button>
+            </div>
+
+            <div class="employee-card" onclick="openModal('bernard-larb')">
+                <img src="images/dfa.png" alt="Dr Bernard Kisiton Larb" class="profile-image">
+                <h3 class="employee-name">DR BERNARD KISITON LARB</h3>
+                <p class="employee-title">DIRECTOR OF FINANCE AND ADMINISTRATION</p>
+                <button class="view-card-btn">View Contact Card</button>
+            </div>
+
+            <div class="employee-card" onclick="openModal('benjamin-mapetese')">
+                <img src="images/dtpa.png" alt="Mr. Benjamin Mapetese" class="profile-image">
+                <h3 class="employee-name">MR. BENJAMIN MAPETESE</h3>
+                <p class="employee-title">DIRECTOR TRAINING POLICY AND ADVOCACY</p>
+                <button class="view-card-btn">View Contact Card</button>
+            </div>
+
+            <div class="employee-card" onclick="openModal('mary-agyepong')">
+                <img src="images/chair.png" alt="Mrs. Mary Abena Agyepong" class="profile-image">
+                <h3 class="employee-name">MRS. MARY ABENA AGYEPONG</h3>
+                <p class="employee-title">AG. BOARD SECRETARY</p>
+                <button class="view-card-btn">View Contact Card</button>
+            </div>
+
+            <div class="employee-card" onclick="openModal('pervious-chileya')">
+                <img src="images/dmeict.png?height=80&width=80" alt="Mr. Pervious Chileya" class="profile-image">
+                <h3 class="employee-name">MR. PERVIOUS CHILEYA</h3>
+                <p class="employee-title">DIRECTOR, MARKETING, EVENTS AND ICT</p>
+                <button class="view-card-btn">View Contact Card</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Overlay -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div id="modalBody">
+                <!-- Modal content will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Employee data
+        const employees = {
+            'angela-appiah': {
+                name: 'REV. (MRS.) ANGELA CARMEN APPIAH',
+                phone: '+233 24 366 2528',
+                email: 'ceo@afcgn.com',
+                website: 'www.afcgn.com',
+                location: 'African Corporate Governance Network',
+                image: 'ceo.png',
+                title: 'Chief Executive Officer, FIoD-Gh',
+                company: 'African Corporate Governance Network'
+            },
+            'bernard-larb': {
+                name: 'DR BERNARD KISITON LARB',
+                phone: '+260244956357',
+                email: 'director.fa@afcgn.com',
+                website: 'www.afcgn.com',
+                location: 'African Corporate Governance Network',
+                image: 'dfa.png',
+                title: 'Director of Finance and Administration',
+                company: 'African Corporate Governance Network'
+            },
+            'benjamin-mapetese': {
+                name: 'MR. BENJAMIN MAPETESE',
+                phone: '+263712234910',
+                email: 'director.tpa@afcgn.com',
+                website: 'www.afcgn.com',
+                location: 'African Corporate Governance Network',
+                image: 'dtpa.png',
+                title: 'Director Training Policy and Advocacy',
+                company: 'African Corporate Governance Network'
+            },
+            'mary-agyepong': {
+                name: 'MRS. MARY ABENA AGYEPONG',
+                phone: '+233 246757635',
+                email: 'boardsecretary@afcgn.com',
+                website: 'www.afcgn.com',
+                location: 'African Corporate Governance Network',
+                image: 'chair.png',
+                title: 'Ag. Board Secretary',
+                company: 'African Corporate Governance Network'
+            },
+            'pervious-chileya': {
+                name: 'MR. PERVIOUS CHILEYA',
+                phone: '+260 973972291',
+                email: 'director.meict@afcgn.com',
+                website: 'www.afcgn.com',
+                location: 'African Corporate Governance Network',
+                image: 'dmeict.png?height=120&width=120',
+                title: 'Director, Marketing, Events and ICT',
+                company: 'African Corporate Governance Network'
+            }
+        };
+
+        function openModal(employeeId) {
+            const employee = employees[employeeId];
+            if (!employee) return;
+
+            // Update URL
+            window.history.pushState({}, '', `#${employeeId}`);
+
+            // Generate modal content
+            const modalBody = document.getElementById('modalBody');
+            modalBody.innerHTML = `
+                <img src="images/${employee.image}" alt="${employee.name}" class="modal-profile-image">
+                <h2 class="modal-employee-name">${employee.name}</h2>
+                <button class="add-contact-btn" onclick="downloadVCard('${employeeId}')">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                    Add to contacts
+                </button>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2">
+                            <path d="M19 21V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1"/>
+                        </svg>
+                        <div class="contact-details">
+                            <h4>Organization</h4>
+                            <p>African Corporate Governance Network</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2">
+                            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                            <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                        </svg>
+                        <div class="contact-details">
+                            <h4>Position</h4>
+                            <p>${employee.title}</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                        </svg>
+                        <div class="contact-details">
+                            <h4>Phone number</h4>
+                            <p><a href="tel:${employee.phone}">${employee.phone}</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                            <polyline points="22,6 12,13 2,6"/>
+                        </svg>
+                        <div class="contact-details">
+                            <h4>Email</h4>
+                            <p><a href="mailto:${employee.email}">${employee.email}</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="2" y1="12" x2="22" y2="12"/>
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                        </svg>
+                        <div class="contact-details">
+                            <h4>Website</h4>
+                            <p><a href="https://${employee.website}" target="_blank">${employee.website}</a></p>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Show modal
+            document.getElementById('modalOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.remove('active');
+            document.body.style.overflow = 'auto';
+            
+            // Update URL to remove hash
+            window.history.pushState({}, '', window.location.pathname);
+        }
+
+        function downloadVCard(employeeId) {
+            const employee = employees[employeeId];
+            if (!employee) return;
+
+            const vcard = `BEGIN:VCARD
+VERSION:3.0
+FN:${employee.name}
+ORG:African Corporate Governance Network
+TITLE:${employee.title}
+TEL:${employee.phone}
+EMAIL:${employee.email}
+URL:${employee.website}
+END:VCARD`;
+
+            const blob = new Blob([vcard], { type: 'text/vcard' });
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `${employee.name.replace(/\s+/g, '_')}.vcf`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(url);
+        }
+
+        // Handle direct URL access (for QR codes)
+        function handleHashChange() {
+            const hash = window.location.hash.substring(1);
+            if (hash && employees[hash]) {
+                openModal(hash);
+            }
+        }
+
+        // Check for hash on page load
+        window.addEventListener('load', handleHashChange);
+        window.addEventListener('hashchange', handleHashChange);
+
+        // Close modal when clicking outside
+        document.getElementById('modalOverlay').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
